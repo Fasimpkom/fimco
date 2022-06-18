@@ -13,6 +13,5 @@ export default resolver.pipe(async () => {
 
   const { data } = resAccessToken.data as GetPublicAccessToken
 
-  console.log(data)
   return data
 })

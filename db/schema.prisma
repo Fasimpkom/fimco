@@ -13,7 +13,7 @@ generator client {
 // --------------------------------------
 
 model User {
-  id             Int      @id @default(autoincrement())
+  id             String   @id @default(uuid())
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   name           String?
@@ -22,8 +22,9 @@ model User {
   role           Role     @default(USER)
   companyName    String?
 
-  tokens   Token[]
-  sessions Session[]
+  tokens         Token[]
+  sessions       Session[]
+  walletAccounts WalletAccount[]
 }
 
 model Session {
@@ -37,8 +38,38 @@ model Session {
   publicData         String?
   privateData        String?
 
-  user   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model WalletAccount {
+  id          String       @id @default(uuid())
+  accessToken String
+  bankId      Int?
+  bank        Institution? @relation(fields: [bankId], references: [id])
+  user        User         @relation(fields: [userId], references: [id])
+  userId      String
+
+  @@unique([bankId, userId])
+}
+
+model Institution {
+  id                    Int             @id @default(autoincrement())
+  name                  String
+  countryCode           String?
+  countryName           String?
+  bankCode              String?
+  primaryColor          String?
+  logo                  String?
+  createdAt             DateTime?
+  updatedAt             DateTime?
+  channels              String?
+  isOcrActive           Boolean?        @default(false)
+  automaticVerification Boolean?        @default(false)
+  pdfVerification       Boolean?        @default(false)
+  passbookVerification  Boolean?        @default(false)
+  institutionType       String?
+  walletAccounts        WalletAccount[]
 }
 
 model Token {
@@ -50,8 +81,8 @@ model Token {
   expiresAt   DateTime
   sentTo      String
 
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 
   @@unique([hashedToken, type])
 }
