@@ -1,7 +1,8 @@
 import { useState, ReactNode, PropsWithoutRef } from "react"
 import { FormProvider, useForm, UseFormProps } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
+import { string, z } from "zod"
+import { FC } from "react"
 
 export interface FormProps<S extends z.ZodType<any, any>>
   extends Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit"> {
@@ -17,6 +18,16 @@ export interface FormProps<S extends z.ZodType<any, any>>
 interface OnSubmitResult {
   FORM_ERROR?: string
   [prop: string]: any
+}
+
+type MyProps = {
+  title: string
+}
+
+const Component: FC<MyProps> = (props) => {
+  const title = props.title
+
+  return <div>haloo</div>
 }
 
 export const FORM_ERROR = "FORM_ERROR"

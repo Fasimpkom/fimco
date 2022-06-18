@@ -1,7 +1,5 @@
 const BASE_URL = process.env.BRICK_BASE_API_URL
-const DOMAIN_URL =
-  process.env.BLITZ_PUBLIC_DOMAIN_URL ||
-  "http://ead0-2001-448a-2040-44bc-6ccd-4c67-8a45-6666.ngrok.io"
+const DOMAIN_URL = process.env.BLITZ_PUBLIC_DOMAIN_URL || "https://41ec-182-2-134-157.ap.ngrok.io"
 
 export const brickApi = {
   getPublicAccessToken: () => `${BASE_URL}/auth/token`,

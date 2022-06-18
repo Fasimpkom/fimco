@@ -1,4 +1,3 @@
-// tailwind.config.js
 const defaultTheme = require("tailwindcss/defaultTheme")
 
 module.exports = {
@@ -21,5 +20,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: "class",
+    }),
+    require("tailwind-scrollbar-hide"),
+  ],
 }
