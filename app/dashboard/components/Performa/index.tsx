@@ -58,3 +58,68 @@ const DUMMY_DATA = [
     seeMore: "/",
   },
 ]
+
+const DUMMY_DATA_PENGELUARAN = [
+  {
+    type: "pengeluaran" as const,
+    icon: "/icons/dashboard/trending_up.svg",
+    title: "Keuntungan Toko",
+    value: 80000,
+    secondaryValue: 100,
+    fromValue: 10,
+    profit: true,
+    seeMore: "/",
+  },
+  {
+    type: "pengeluaran" as const,
+    icon: "/icons/dashboard/south_west_1.svg",
+    title: "Keuntungan Toko",
+    value: 80000,
+    secondaryValue: 100,
+    fromValue: 10,
+    profit: true,
+    seeMore: "/",
+  },
+  {
+    type: "pengeluaran" as const,
+    icon: "/icons/dashboard/north_east_1.svg",
+    title: "Keuntungan Toko",
+    value: 80000,
+    secondaryValue: 100,
+    fromValue: 10,
+    profit: false,
+    seeMore: "/",
+  },
+]
+const DUMMY_DATA_PENDAPATAN = [
+  {
+    type: "pendapatan" as const,
+    icon: "/icons/dashboard/trending_up.svg",
+    title: "Keuntungan Toko",
+    value: 80000,
+    secondaryValue: 100,
+    fromValue: 10,
+    profit: true,
+    seeMore: "/",
+  },
+  {
+    type: "pendapatan" as const,
+    icon: "/icons/dashboard/south_west_1.svg",
+    title: "Keuntungan Toko",
+    value: 80000,
+    secondaryValue: 100,
+    fromValue: 10,
+    profit: true,
+    seeMore: "/",
+  },
+  {
+    type: "pendapatan" as const,
+    icon: "/icons/dashboard/north_east_1.svg",
+    title: "Keuntungan Toko",
+    value: 80000,
+    secondaryValue: 100,
+    fromValue: 10,
+    profit: false,
+    seeMore: "/",
+  },
+]
