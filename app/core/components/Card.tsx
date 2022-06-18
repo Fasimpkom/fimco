@@ -31,7 +31,7 @@ const Card: FC<CardProps> = ({ title, thumbnail, content, children, detail }) =>
       {detail && (
         <div className="mt-4 bg-gray-200 rounded-bl rounded-br">
           <div className="p-3 ml-3">
-            <Link href={"google.com"}>
+            <Link href={detail}>
               <a className="text-blue-600 font-bold">Lihat Selengkapnya</a>
             </Link>
           </div>
