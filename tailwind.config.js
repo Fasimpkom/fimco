@@ -8,6 +8,7 @@ module.exports = {
       tny: "280px",
       vsm: "320px",
       msm: "360px",
+      ssm: "380px",
       smm: "400px",
       xsm: "480px",
       smd: "586px",
@@ -21,5 +22,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: "class",
+    }),
+    require("tailwind-scrollbar-hide"),
+  ],
 }
