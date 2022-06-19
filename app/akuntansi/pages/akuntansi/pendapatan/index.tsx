@@ -51,6 +51,72 @@ export const dataDummy = {
   ],
 }
 
+const compareBaseOnDate = (dataOne: any, dataTwo: any) => {
+  const dateOneConverted = new Date(dataOne.tanggal)
+  const dateTwoConverted = new Date(dataTwo.tanggal)
+
+  if (dateOneConverted < dateTwoConverted) {
+    return -1
+  } else if (dateOneConverted > dateTwoConverted) {
+    return 1
+  }
+
+  return 0
+}
+
+const totalPendapatan = (tipe: string, data: Array<any>): any => {
+  // 1. sort berdasarkan tanggal
+  const copyData = [...data].sort(compareBaseOnDate)
+  console.log(copyData)
+  let labels: number[] = []
+  let totals: number[] = []
+  // 2. kalau hari tinggal totalin aja asalkan harinya sama, terus taro di label dan
+  // dataset
+  // 3. kalau minggu, loop untuk 7 hari kedepan terus totalin
+  // 4. kalau tahun, loop untuk 365 hari kedepan
+  let prevTanggal = new Date(copyData[0].tanggal).getDate()
+  let currentSum = copyData[0].jumlah
+  let tanggal: number
+  labels.push(new Date(copyData[0].tanggal).getDate())
+  if (tipe === "hari") {
+    for (let i = 1; i < copyData.length; i++) {
+      tanggal = new Date(copyData[i].tanggal).getDate()
+
+      if (prevTanggal === tanggal) {
+        currentSum += data[i].jumlah
+      } else {
+        prevTanggal = tanggal
+        totals.push(currentSum)
+        currentSum = copyData[i].jumlah
+        labels.push(tanggal)
+      }
+    }
+    totals.push(currentSum)
+  } else if (tipe === "bulan") {
+    for (let i = 1; copyData.length; i++) {
+      tanggal = new Date(copyData[i].tanggal).getDate()
+      let j = 30
+      while (j > 0) {
+        j--
+        i++
+        currentSum += data[i].jumlah
+      }
+    }
+  }
+
+  return {
+    labels,
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: totals,
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  }
+}
+
 const PendapatanPage: BlitzPage = () => {
   const [data, setData] = useState(DUMMY_DATA_PENGELUARAN)
   const [paginationData, setPaginationData] = useState(data)
@@ -62,11 +128,12 @@ const PendapatanPage: BlitzPage = () => {
 
       <div className="relative overflow-x-auto shadow-md rounded-lg bg-white mt-5 p-4">
         <div className="bg-gray-200 mb-5 rounded grid grid-cols-4 mx-3 px-2 py-1 text-center">
+          <div className="bg-white rounded-md py-3 text-blue-600">1 Hari</div>
           <div className="rounded py-3">1 Minggu</div>
           <div className="rounded py-3">1 Bulan</div>
           <div className="rounded py-3">1 Tahun </div>
         </div>
-        <Line options={options} data={dataDummy} />
+        <Line options={options} data={totalPendapatan("hari", DUMMY_DATA_PENGELUARAN)} />
       </div>
 
       <div className="relative overflow-x-auto shadow-md rounded-lg bg-white mt-5 p-4">
@@ -98,193 +165,94 @@ const PendapatanPage: BlitzPage = () => {
 const DUMMY_DATA_PENGELUARAN = [
   {
     idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
+    tanggal: "2022-06-18T08:23",
     sumber: "OVO",
-    jumlah: "Rp203.000,00",
+    jumlah: 203.0,
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "2022-06-18T08:23",
+    sumber: "OVO",
+    jumlah: 203.0,
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "2022-06-18T08:23",
+    sumber: "OVO",
+    jumlah: 203.0,
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "2022-06-19T08:23",
+    sumber: "OVO",
+    jumlah: 203.0,
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "2022-06-19T08:23",
+    sumber: "OVO",
+    jumlah: 203.0,
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "2022-06-19T08:23",
+    sumber: "OVO",
+    jumlah: 203.0,
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "2022-06-20T08:23",
+    sumber: "OVO",
+    jumlah: 203.0,
+    actionType: "delete" as const,
+  },
 
-    actionType: "delete" as const,
-  },
   {
     idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
+    tanggal: "2022-06-20T08:23",
     sumber: "OVO",
-    jumlah: "Rp203.000,00",
+    jumlah: 203.0,
     actionType: "delete" as const,
   },
   {
     idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
+    tanggal: "2022-06-20T08:23",
     sumber: "OVO",
-    jumlah: "Rp203.000,00",
+    jumlah: 203.0,
     actionType: "delete" as const,
   },
   {
     idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
+    tanggal: "2022-06-20T08:23",
     sumber: "OVO",
-    jumlah: "Rp203.000,00",
+    jumlah: 203.0,
     actionType: "delete" as const,
   },
   {
     idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
+    tanggal: "2022-06-20T08:23",
     sumber: "OVO",
-    jumlah: "Rp203.000,00",
+    jumlah: 203.0,
     actionType: "delete" as const,
   },
   {
     idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Tokopedia",
-    jumlah: "Rp203.000,00",
+    tanggal: "2022-06-20T08:23",
+    sumber: "OVO",
+    jumlah: 203.0,
     actionType: "delete" as const,
   },
   {
     idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Tokopedia",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
-    actionType: "delete" as const,
-  },
-  {
-    idTransaksi: "#121313",
-    tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "Lainnya",
-    jumlah: "Rp203.000,00",
+    tanggal: "2022-06-18T08:23",
+    sumber: "OVO",
+    jumlah: 203.0,
     actionType: "delete" as const,
   },
 ]

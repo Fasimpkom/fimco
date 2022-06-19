@@ -4,7 +4,7 @@ type RiwayatTableItemProps = {
   idTransaksi: string
   tanggal: string
   sumber: string
-  jumlah: string
+  jumlah: number
   actionType?: "delete" | "update"
 }
 
