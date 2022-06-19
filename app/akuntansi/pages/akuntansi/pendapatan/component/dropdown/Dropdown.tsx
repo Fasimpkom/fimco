@@ -5,7 +5,7 @@ import { Fragment, useState, FC } from "react"
 
 type DropdownProps = {
   setData: Function
-  items: Array<object>
+  items: Array<any>
 }
 
 const Dropdown: FC<DropdownProps> = ({ setData, items }) => {
@@ -25,7 +25,7 @@ const Dropdown: FC<DropdownProps> = ({ setData, items }) => {
         if (newSelectedSource === "Semua Sumber") {
           return true
         }
-        return data.sumber === newSelectedSource
+        return data?.sumber === newSelectedSource
       })
     )
   }
