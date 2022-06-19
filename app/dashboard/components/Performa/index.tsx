@@ -1,25 +1,29 @@
-import { Image } from "blitz"
-import { FC } from "react"
+import getPerformance from "app/brick/queries/getPerformance"
+import { useQuery } from "blitz"
+import { FC, useState } from "react"
+import { IntervalTabs } from "../IntervalTabs"
 import { PerformaCard } from "./Card"
 
 export const Performa: FC = () => {
+  const [data] = useQuery(getPerformance, null)
+  const [currentData, setCurrentData] = useState(data["oneDay"])
   return (
     <div className="font-sans">
-      <p className="flex items-center text-blue-500 font-semibold">
-        <span>Menampilkan 7 hari terakhir</span>
-        <i className="ml-2 flex items-center">
-          <Image
-            src="/icons/dashboard/keyboard_arrow_down_blue.svg"
-            width={16}
-            height={16}
-            alt="down"
-          />
-        </i>
-      </p>
-
+      <IntervalTabs
+        oneDayClick={() => setCurrentData(data["oneDay"])}
+        oneWeekClick={() => setCurrentData(data["oneWeek"])}
+        oneMonthClick={() => setCurrentData(data["oneMonth"])}
+        oneYearClick={() => setCurrentData(data["oneYear"])}
+      />
       <div>
         {DUMMY_DATA.map((d) => (
-          <PerformaCard {...d} key={d.title} />
+          <PerformaCard
+            {...d}
+            key={d.title}
+            value={currentData[d.type].amount}
+            secondaryValue={currentData[d.type].increase}
+            fromValue={currentData[d.type].from}
+          />
         ))}
       </div>
     </div>
@@ -35,7 +39,6 @@ const DUMMY_DATA = [
     secondaryValue: 100,
     fromValue: 10,
     profit: true,
-    seeMore: "/",
   },
   {
     type: "pendapatan" as const,
@@ -45,7 +48,7 @@ const DUMMY_DATA = [
     secondaryValue: 100,
     fromValue: 10,
     profit: true,
-    seeMore: "/",
+    seeMore: "/akuntansi/pendapatan",
   },
   {
     type: "pengeluaran" as const,
@@ -55,6 +58,6 @@ const DUMMY_DATA = [
     secondaryValue: 100,
     fromValue: 10,
     profit: false,
-    seeMore: "/",
+    seeMore: "/akuntansi/pengeluaran",
   },
 ]

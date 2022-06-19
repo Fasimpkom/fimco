@@ -38,7 +38,7 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
     name: "Konfigurasi",
     icon: "/icons/dashboard/settings.svg",
-    path: "/konfigurasi",
+    path: "/dashboard/konfigurasi",
     isDisclosure: false,
     disclosureItems: [],
   },

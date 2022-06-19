@@ -43,14 +43,29 @@ model Session {
 }
 
 model WalletAccount {
-  id          String       @id @default(uuid())
-  accessToken String
-  bankId      Int?
-  bank        Institution? @relation(fields: [bankId], references: [id])
-  user        User         @relation(fields: [userId], references: [id])
-  userId      String
+  id           String        @id @default(uuid())
+  accessToken  String
+  bankId       Int?
+  bank         Institution?  @relation(fields: [bankId], references: [id])
+  user         User          @relation(fields: [userId], references: [id])
+  userId       String
+  identifier   String        @unique
+  transactions Transaction[]
+}
 
-  @@unique([bankId, userId])
+model Transaction {
+  id        String          @id @default(uuid())
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  amount    Int
+  type      TransactionType
+  walletId  String
+  wallet    WalletAccount   @relation(fields: [walletId], references: [id])
+}
+
+enum TransactionType {
+  IN
+  OUT
 }
 
 model Institution {
@@ -89,6 +104,7 @@ model Token {
 
 enum Role {
   USER
+  ADMIN
 }
 
 enum TokenType {

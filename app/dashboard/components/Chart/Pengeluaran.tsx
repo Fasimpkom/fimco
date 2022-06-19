@@ -1,21 +1,15 @@
 import { FC, useState } from "react"
 import { IntervalTabs } from "../IntervalTabs"
-// import { Chart as ChartJS, registerables } from "chart.js"
 import { Chart as ChartJS } from "chart.js/auto"
 import { Line, Chart } from "react-chartjs-2"
-// ChartJS.register(...registerables)
 
-export const Keuntungan: FC = () => {
+export const Pengeluaran: FC = () => {
   const [currentData, setCurrentData] = useState<any>(DUMMY_DATA["oneDay"])
   return (
     <div className="font-sans">
-      <h2 className="font-bold text-2xl text-black">Keuntungan Toko</h2>
-      <p className="text-sm leading-5 font-medium text-gray-500">
-        Jumlah uang yang diperoleh dari pendapatan setelah dikurangi pengeluaran
-      </p>
-
+      <h2 className="font-bold text-2xl text-black">Pengeluaran Toko</h2>
       <div className="rounded-3xl p-4 bg-white mt-5">
-        <h3 className="text-center font-bold text-xl mb-2">Keuntungan Total</h3>
+        <h3 className="text-center font-bold text-xl mb-2">Pengeluaran Total</h3>
         <IntervalTabs
           oneDayClick={() => setCurrentData(DUMMY_DATA["oneDay"])}
           oneWeekClick={() => setCurrentData(DUMMY_DATA["oneWeek"])}
@@ -47,7 +41,7 @@ const DUMMY_DATA = {
     datasets: [
       {
         data: [150000, 130000, 170000, 230000, 240000, 240000, 290000],
-        id: "oneWeek",
+        id: "oneMonth",
         backgroundColor: "#3B82F6",
         borderColor: "#3B82F6",
       },

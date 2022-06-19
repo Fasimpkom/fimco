@@ -1,7 +1,7 @@
 import { Profile } from "app/core/components/Profile"
 import { useSidebarDashboard } from "app/core/contexts/SidebarDashboardContext"
 import { Image } from "blitz"
-import { FC } from "react"
+import { FC, Suspense } from "react"
 type DashboardNavbarProps = {
   className?: string
 }
@@ -19,7 +19,9 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({ className }) => {
           <Image src="/icons/dashboard/fimco-sm.svg" layout="fill" objectFit="contain" alt="menu" />
         </div>
       </div>
-      <Profile />
+      <Suspense fallback="...">
+        <Profile />
+      </Suspense>
     </nav>
   )
 }

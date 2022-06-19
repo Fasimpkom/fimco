@@ -5,6 +5,13 @@ const DOMAIN_URL =
 
 export const brickApi = {
   getPublicAccessToken: () => `${BASE_URL}/auth/token`,
+  getBalanceSummary: (from: string, to: string) =>
+    `${BASE_URL}/transaction-balance-summary?from=${from}&to=${to}`,
+  getTransactionList: (from: string, to: string) =>
+    `${BASE_URL}/transaction/list?from=${from}&to=${to}`,
+  getTransactionMfaList: () => `${BASE_URL}/transaction-mfa/list`,
+  getAuth: () => `${BASE_URL}/auth/`,
+  getGopay: () => `${BASE_URL}/auth/gopay`,
   getListInstutions: () => `${BASE_URL}/institution/list`,
   getClientId: () => process.env.BRICK_CLIENT_ID || "",
   getClientSecret: () => process.env.BRICK_CLIENT_SECRET || "",
