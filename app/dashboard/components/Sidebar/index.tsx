@@ -3,11 +3,14 @@ import { Transition } from "@headlessui/react"
 import { useSidebarDashboard } from "app/core/contexts/SidebarDashboardContext"
 import { SidebarLogo } from "./Logo"
 import { Divider } from "../Divider"
-import { Image } from "blitz"
+import { Image, useMutation } from "blitz"
 import { DashboardItems } from "./Items"
+import logout from "app/auth/mutations/logout"
 
 export const DashboardSidebar: FC = () => {
   const { show, onClose } = useSidebarDashboard()
+  const [lg] = useMutation(logout)
+  const onLogout = async () => await lg()
   return (
     <>
       <Transition
@@ -44,6 +47,12 @@ export const DashboardSidebar: FC = () => {
         </div>
         <Divider className="my-7" />
         <DashboardItems />
+        <button
+          onClick={onLogout}
+          className="flex items-center ml-3 mt-10 text-red-500 bg-white border border-red-500 rounded-md py-[10px] px-5"
+        >
+          <span className="mr-3 font-semibold text-sm">Logout</span>
+        </button>
       </Transition>
     </>
   )
