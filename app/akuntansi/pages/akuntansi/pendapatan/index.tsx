@@ -15,39 +15,116 @@ const DUMMY_DATA_PENGELUARAN = [
   {
     idTransaksi: "#121313",
     tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "1",
+    sumber: "OVO",
     jumlah: "Rp203.000,00",
     actionType: "delete" as const,
   },
   {
     idTransaksi: "#121313",
     tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "2",
+    sumber: "OVO",
     jumlah: "Rp203.000,00",
     actionType: "delete" as const,
   },
   {
     idTransaksi: "#121313",
     tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "3",
+    sumber: "OVO",
     jumlah: "Rp203.000,00",
     actionType: "delete" as const,
   },
   {
     idTransaksi: "#121313",
     tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "4",
+    sumber: "OVO",
     jumlah: "Rp203.000,00",
     actionType: "delete" as const,
   },
   {
     idTransaksi: "#121313",
     tanggal: "18 Juni 2022 08:23 WIB",
-    sumber: "5",
+    sumber: "OVO",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Tokopedia",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Tokopedia",
     jumlah: "Rp203.000,00",
     actionType: "delete" as const,
   },
 
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Lainnya",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Lainnya",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Lainnya",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Lainnya",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Lainnya",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Lainnya",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Lainnya",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Lainnya",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
+  {
+    idTransaksi: "#121313",
+    tanggal: "18 Juni 2022 08:23 WIB",
+    sumber: "Lainnya",
+    jumlah: "Rp203.000,00",
+    actionType: "delete" as const,
+  },
   {
     idTransaksi: "#121313",
     tanggal: "18 Juni 2022 08:23 WIB",
@@ -129,6 +206,7 @@ const DUMMY_DATA_PENGELUARAN = [
 
 const PendapatanPage: BlitzPage = () => {
   const [data, setData] = useState(DUMMY_DATA_PENGELUARAN)
+  const [paginationData, setPaginationData] = useState(data)
 
   return (
     <section className="font-sans">
@@ -146,16 +224,12 @@ const PendapatanPage: BlitzPage = () => {
         ></input>
         <RiwayatTable>
           <RiwayatTableHeader />
-          {data.map((d) => (
+          {paginationData.map((d) => (
             <RiwayatTableItem {...d} key={d.idTransaksi} />
           ))}
         </RiwayatTable>
         <div className="my-3">
-          <TablePagination
-            items={DUMMY_DATA_PENGELUARAN}
-            setCurrentItems={setData}
-            itemsPerPage={10}
-          />
+          <TablePagination items={data} setCurrentItems={setPaginationData} itemsPerPage={10} />
         </div>
       </div>
     </section>

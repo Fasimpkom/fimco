@@ -1,7 +1,7 @@
 import { Menu } from "@headlessui/react"
 import DropdownItem from "./DropdownItem"
 import { Transition } from "@headlessui/react"
-import { Fragment, useState } from "react"
+import { Fragment, useState, FC } from "react"
 
 type DropdownProps = {
   setData: Function
@@ -19,7 +19,15 @@ const Dropdown: FC<DropdownProps> = ({ setData, items }) => {
       return newSelectableSource
     })
     setSelectedSource(newSelectedSource)
-    setData(items.filter((data) => data.sumber === newSelectedSource))
+
+    setData(
+      items.filter((data) => {
+        if (newSelectedSource === "Semua Sumber") {
+          return true
+        }
+        return data.sumber === newSelectedSource
+      })
+    )
   }
 
   return (

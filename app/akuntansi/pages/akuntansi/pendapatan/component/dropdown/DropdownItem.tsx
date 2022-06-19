@@ -3,7 +3,7 @@ import { ReactNode, FC } from "react"
 
 type DropdownItemProps = {
   children?: ReactNode
-  onClick: Function
+  onClick?: React.MouseEventHandler<HTMLDivElement>
 }
 
 const DropdownItem: FC<DropdownItemProps> = ({ children, onClick }) => {
