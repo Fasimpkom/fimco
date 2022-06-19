@@ -16,7 +16,7 @@ const RiwayatTableItem: FC<RiwayatTableItemProps> = ({
   actionType,
 }) => {
   return (
-    <div className="p-3 flex justify-between min-w-[650px]">
+    <div className="p-3 grid grid-cols-5 min-w-[650px]">
       <div>{idTransaksi}</div>
       <div>{tanggal}</div>
       <div>{sumber}</div>

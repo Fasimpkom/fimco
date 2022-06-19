@@ -3,9 +3,10 @@ import { ReactNode, FC } from "react"
 
 type DropdownItemProps = {
   children?: ReactNode
+  onClick: Function
 }
 
-const DropdownItem: FC<DropdownItemProps> = ({ children }) => {
+const DropdownItem: FC<DropdownItemProps> = ({ children, onClick }) => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ")
   }
@@ -13,15 +14,15 @@ const DropdownItem: FC<DropdownItemProps> = ({ children }) => {
   return (
     <Menu.Item>
       {({ active }) => (
-        <a
-          href="#"
+        <div
+          onClick={onClick}
           className={classNames(
             active ? "bg-gray-100 text-gray-900" : "text-gray-700",
             "block px-4 py-2 text-sm"
           )}
         >
           {children}
-        </a>
+        </div>
       )}
     </Menu.Item>
   )
